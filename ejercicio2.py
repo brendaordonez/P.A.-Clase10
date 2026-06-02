@@ -1,0 +1,38 @@
+# Creacional: Factory Method
+class ShapeFactory:
+    def create(self, kind):
+        if kind == "circle":
+            return Circle()
+        elif kind == "square":
+            return Square()
+
+# Estructural: Composite
+class Component:
+    def operation(self):
+        pass
+
+class Leaf(Component):
+    def operation(self):
+        return "Leaf"
+class Composite(Component):
+    def __init__(self):
+        self.children = []
+    def add(self, child):
+        self.children.append(child)
+    def operation(self):
+        return "+".join([c.operation() for c in self.children])
+
+# Comportamiento: Command
+class Command:
+    def execute(self):
+        pass
+
+class LightOn(Command):
+    def execute(self):
+        print("Light turned on")
+
+class Remote:
+    def __init__(self, command):
+        self.command = command
+    def press(self):
+        self.command.execute()
